@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FCFF_PPG</title>
+
+    <!-- folhas de estilo CSS do bootstrap -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+   
+</head>
+
+<body>
+
+    @if ((ViewBag.Mensagem != null) && (ViewBag.Mensagem != ""))
+    {
+        <!--Formulario principal para Display de Mensagens-->
+        <div id="ModalMensagem" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h5 class="modal-title"> @Html.Raw(ViewBag.Titulo)</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                @Html.Raw(ViewBag.Mensagem)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#ModalMensagem").modal('show');
+            });
+        </script>
+    }
+
+    <div class="container">
+        <hr />
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand">Gestão de Emissoras e Audiência</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cadastro
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href=@Url.Action("Cadastro", "Emissora")>Emissora</a>
+                            <a class="dropdown-item" href=@Url.Action("Cadastro", "Audiencia")>Audiência</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Relatório
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href=@Url.Action("ConsultaAudienciaData", "Audiencia")>Audiência por data</a>
+                            <a class="dropdown-item" href=@Url.Action("Consulta", "Emissora")>Consulta Emissoras</a>
+                        </div>
+                    </li>
+                    
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+    <!-- arquivos javascript -->
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <div class="container">
+        <!-- conteudo das demais páginas.. -->
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - PPG - <strong>Fábio Cavadas Fernandes Ferreira.</strong></p>
+        </footer>
+    </div>
+
+</body>
+</html>

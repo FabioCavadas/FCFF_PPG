@@ -1,0 +1,78 @@
+﻿@model IEnumerable<FCFF.PPG.Models.ModelView.AudienciaView>
+
+@{
+
+    ViewBag.Title = "ConsultaAudienciaData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h3>Consulta Audiência por data</h3>
+
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+
+        @using (Html.BeginForm("ConsultaAudienciaData", "Audiencia", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label for="DataIni"><b>Data Inicial</b></label>
+                        <input class="form-control" type="date" name="dti" required="required" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label for="DataFim"><b>Data Final</b></label>
+                        <input class="form-control" type="date" name="dtf" required="required" />
+                    </div>
+                    <br />
+                </div>
+
+                <input class="btn btn-success" type="submit" value=Pesquisar />
+            </div>
+        }
+    </div>
+</nav>
+@if (Model != null)
+{
+    <table class="table table-sm table-hover table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pontos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataHora)
+            </th>
+            <th>Ações</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pontos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataHora)
+            </td>
+            <td>
+                <a href="@Url.Action("ConsultaSomatorioAudiencia", "Audiencia", new{nome = item.Nome, data = item.DataHora.Date})" class="btn btn-success btn-sm">Somatório de pontos diário</a>
+
+                <a href="@Url.Action("ConsultaMediaAudiencia", "Audiencia", new{nome = item.Nome, data = item.DataHora.Date})" class="btn btn-success btn-sm">Média de pontos diária</a>
+            </td>
+
+
+        </tr>
+        }
+
+    </table>
+
+}

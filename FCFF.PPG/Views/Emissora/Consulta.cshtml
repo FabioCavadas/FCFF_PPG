@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FCFF.PPG.Models.ModelView.EmissoraView>
+
+@{
+    ViewBag.Title = "Consulta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- bloco javascript -->
+<script type="text/javascript">
+    function confirmacao() {
+        var mensagem = "Deseja excluir esta emissora?";
+            mensagem += "\nTodos os registross desta emissora serão excluidos!"
+
+        return confirm(mensagem);
+}
+</script>
+<br />
+<h3>Consulta Emissoras</h3>
+
+
+<table class="table table-sm table-hover table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>Ações</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Atualizar", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })  |
+                @Html.ActionLink("Deletar", "Excluir", new { id = item.Id }, new { @class = "btn btn-danger btn-sm",
+               @onclick = "return confirmacao(); "})
+            </td>
+        </tr>
+    }
+    @ViewBag.Mensagem
+</table>

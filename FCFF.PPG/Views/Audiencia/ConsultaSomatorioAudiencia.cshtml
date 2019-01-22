@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FCFF.PPG.Models.ModelView.AudienciaView>
+
+@{
+    ViewBag.Title = "ConsultaSomatorioAudiencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Somatório Audiência</h2>
+
+@if (Model != null)
+{
+    <table class="table table-sm table-hover table-bordered">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Somatorio)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.DataHora)
+                </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Somatorio)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.DataHora.Date)
+                    </td>
+
+            </tr>
+        }
+
+    </table>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href='@Url.Action("ConsultaAudienciaData", "Audiencia")' class="btn btn-secondary">Retornar</a>
+        </div>
+
+    </div>
+
+}
