@@ -14,7 +14,7 @@ namespace FCFF.PPG.Models.ModelView
 
         [Display(Name = "Emissora")]
         [Required(ErrorMessage = "Informe o nome da emissora")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use apenas caracteres alfabéticos.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Use apenas caracteres alfabéticos.")]
         public string Nome { get; set; }
 
         [Display(Name = "Ações")]
